@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+</head>
+<body>
+    <h1><%=shopData.shopName%> Bargain Books</h1>
+    <h2>Here are the books under £20:</h2>
+
+    <% for (let i = 0; i < availableBooks.length; i++) { %>
+        <% let book = availableBooks[i]; %>
+        <ul>
+            <li><%= book.name %>, £<%= book.price %></li>
+        </ul>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%=shopData.shopName%> </title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+</head>
+<body>
+    <h1><%=shopData.shopName%>: Add Book</h1>
+    <form method="POST" action="bookadded">
+        <label for="name">Book name:</label>
+        <input type="text" name="name"><br><br>
+        <label for="price">Price:</label>
+        <input type="number" name="price"><br><br>
+        <input type="submit" value="Add Book" />
+    </form>
+</body>
+</html>
