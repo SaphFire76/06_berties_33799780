@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+</head>
+<body>
+    <h1><%=shopData.shopName%> Users</h1>
+    <h2>Here are the the users of the shop:</h2>
+
+    <% for (let i = 0; i < users.length; i++) { %>
+        <% let user = users[i]; %>
+        <ul>
+            <li><%= user.username %>, <%= user.fname %>, <%= user.lname %>, <%= user.email %></li>
+        </ul>
+    <% } %>
+</body>
+</html>

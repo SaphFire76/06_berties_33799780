@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+</head>
+<body>
+    <h1><%=shopData.shopName%> Login Audit</h1>
+
+    <% for (let i = 0; i < audit.length; i++) { %>
+        <% let adt = audit[i]; %>
+        <ul>
+            <li><%= adt.username %>, <%= adt.attemptRslt %>, <%= adt.ip_address %>, <%= adt.attemptTime %></li>
+        </ul>
+    <% } %>
+</body>
+</html>
