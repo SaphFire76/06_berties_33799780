@@ -1,5 +1,6 @@
 // Import express and ejs and mysql
 var express = require ('express')
+var session = require('express-session');
 var ejs = require('ejs')
 const path = require('path')
 var mysql = require('mysql2');
@@ -8,6 +9,16 @@ const env = require('dotenv').config()
 // Create the express application object
 const app = express()
 const port = 8000
+
+// Create a session
+app.use(session({
+    secret: 'somerandomstuff',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}))
 
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
@@ -39,7 +50,7 @@ app.use('/', mainRoutes)
 
 // Load the route handlers for /users
 const usersRoutes = require('./routes/users')
-app.use('/users', usersRoutes)
+app.use('/users', usersRoutes.router)
 
 // Load the route handlers for /books
 const booksRoutes = require('./routes/books')

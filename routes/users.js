@@ -3,8 +3,16 @@ const express = require("express")
 const router = express.Router()
 const bcrypt = require('bcrypt');
 
+const redirectLogin = (req, res, next) => {
+    if (!req.session.userId ) {
+        res.redirect('../users/login') // redirect to the login page
+    } else { 
+        next (); // move to the next middleware function
+    } 
+}
+
 function loginAudit(username, attemptRslt, ip) {
-    let sqlquery = "INSERT INTO loginaudit (username, attemptRslt, ip_address) VALUES (?, ?, ?)";
+    let sqlquery = "INSERT INTO loginAudit (username, attemptRslt, ip_address) VALUES (?, ?, ?)";
     audit = [username, attemptRslt, ip]
 
     db.query(sqlquery, audit, () => {});
@@ -63,29 +71,46 @@ router.post('/loggedin', function (req, res, next) {
         if(err){
             next(err);
         }
-        hashedPassword = result[0].hashedPass;
-        bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
-            if (err) {
-                // TODO: Handle error
-                next(err)
-            }
-            else if (result == true) {
-                // TODO: Send message
-                loginAudit(username, 'Success', req.ip);
-                res.send('Password matches!')
-            }
-            else {
-                // TODO: Send message
-                loginAudit(username, 'Failed', req.ip);
-                res.send('You may not pass filthy stinky crusty dusty intuder!')
-            }
-        })
+        else if (result.length == 0) {
+            loginAudit(username, 'Failed - User not found', req.ip);
+            res.send('Your credentials do not exist in the database.');
+        }
+        else{
+            hashedPassword = result[0].hashedPass;
+            bcrypt.compare(req.body.password, hashedPassword, function(err, result) {
+                if (err) {
+                    // TODO: Handle error
+                    next(err)
+                }
+                else if (result == true) {
+                    // TODO: Send message
+                    loginAudit(username, 'Success', req.ip);
+                    // Save user session here, when login is successful
+                    req.session.userId = req.body.username;
+                    res.send('Password matches!')
+                }
+                else {
+                    // TODO: Send message
+                    loginAudit(username, 'Failed - Incorrect password', req.ip);
+                    res.send('You may not pass filthy stinky crusty dusty musty intuder!')
+                }
+            })
+        }
     })
-
 })
 
+router.get('/logout', redirectLogin, (req,res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('../')
+        }
+        res.send('you are now logged out. <a href='+'../'+'>Home</a>');
+    })
+})
+
+
 router.get('/audit', function (req, res, next) {
-    let sqlquery = "SELECT * FROM loginaudit"; // query database to get all the books
+    let sqlquery = "SELECT * FROM loginAudit"; // query database to get all the books
     
     // execute sql query
     db.query(sqlquery, (err, result) => {
@@ -97,4 +122,7 @@ router.get('/audit', function (req, res, next) {
 })
 
 // Export the router object so index.js can access it
-module.exports = router
+module.exports = {
+    router: router,
+    redirectLogin: redirectLogin
+};

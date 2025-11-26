@@ -7,7 +7,7 @@ USE berties_books;
 # Create the tables
 CREATE TABLE IF NOT EXISTS books (
     id     INT AUTO_INCREMENT,
-    name   VARCHAR(50),
+    name   VARCHAR(50) NOT NULL,
     price  DECIMAL(5, 2),
     PRIMARY KEY(id));
 
