@@ -69,7 +69,7 @@ router.get('/login', function (req, res, next) {
     res.render('login.ejs')
 })
 
-router.post('/loggedin', check('username').isLength({ min: 5, max: 20}), function (req, res, next) {
+router.post('/loggedin', check('username').isLength({max: 20}), function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         res.render('./login')
