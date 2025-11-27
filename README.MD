@@ -43,7 +43,7 @@ const db = mysql.createPool({
 - `/books/addbook`
 - `/books/bargainbooks`
 
-## Data Validation Strategy
+## Data Validation
 ### Where Validation Was Applied
 I implemented validation using `express-validator` on all routes that accept and process user input (POST requests and specific GET requests with query parameters).
 
@@ -83,7 +83,7 @@ Validation was applied specifically to these routes because they handle external
 
 
 
-## Data Sanitisation Strategy
+## Data Sanitisation
 ### Where Sanitisation Was Applied
 I utilized `req.sanitize()` on the majority of user inputs before processing them or storing them in the database. This includes:
 
