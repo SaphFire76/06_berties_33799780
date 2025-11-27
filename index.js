@@ -1,6 +1,7 @@
 // Import express and ejs and mysql
 var express = require ('express')
 var session = require('express-session');
+const expressSanitizer = require('express-sanitizer');
 var ejs = require('ejs')
 const path = require('path')
 var mysql = require('mysql2');
@@ -20,6 +21,9 @@ app.use(session({
     }
 }))
 
+// Create an input sanitizer
+app.use(expressSanitizer());
+
 // Tell Express that we want to use EJS as the templating engine
 app.set('view engine', 'ejs')
 
@@ -36,8 +40,8 @@ app.locals.shopData = {shopName: "Bertie's Books"}
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
