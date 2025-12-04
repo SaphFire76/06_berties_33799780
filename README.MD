@@ -119,7 +119,7 @@ This API provides access to Berties Books' library. It supports searching by nam
 
 Returns a list of books. If no parameters are provided, it returns all books in the database.
 
-#### Query Parameters
+### Query Parameters
 You can use any combination of the following parameters to refine your results.
 
 | Parameter   | Type   | Description                                                                 |
@@ -128,3 +128,6 @@ You can use any combination of the following parameters to refine your results.
 | `minprice`  | Number | Filters for books with a price **greater than or equal** to this value.     |
 | `max_price` | Number | Filters for books with a price **less than or equal** to this value.        |
 | `sort`      | String | Sorts the results. Accepted values: `name`, `price`.                        |
+
+#### **Example**: `http://localhost:8000/api/books?sort=price&minprice=10`
+Gets books of price greater than 10, sorted by price in ascending order.
