@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%=shopData.shopName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Type the name of a city to get the current weather in that city!</h1>
+    <form action="weather_result" method="GET">
+      <p>What city?</p>
+      <input id="weather-box" type="text" name="search_weather">
+      <input type="submit" value="Search" >
+    </form>
+    <br>
+    <h2>Current Weather in <%= city.name %>: <%= city.weather[0].description %></h2>
+    <ul>
+        <li>Temperature: <%= city.main.temp %></li>
+        <li>Feels like: <%= city.main.feels_like %></li>
+        <li>Humidity: <%= city.main.humidity %></li>
+        <li>Wind speed:<%= city.wind.speed %></li>
+    </ul>
+  </body>
+</html>
