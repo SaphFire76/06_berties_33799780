@@ -115,7 +115,7 @@ This API provides access to Berties Books' library. It supports searching by nam
 ## Endpoints
 
 ### Get Books
-`GET /books`
+`GET api/books`
 
 Returns a list of books. If no parameters are provided, it returns all books in the database.
 
@@ -129,5 +129,5 @@ You can use any combination of the following parameters to refine your results.
 | `max_price` | Number | Filters for books with a price **less than or equal** to this value.        |
 | `sort`      | String | Sorts the results. Accepted values: `name`, `price`.                        |
 
-#### Example: `http://localhost:8000/api/books?sort=price&minprice=10`
+#### Example: `https://www.doc.gold.ac.uk/usr/407/api/books?sort=price&minprice=10`
 Gets books of price greater than 10, sorted by price in ascending order.
