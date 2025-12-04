@@ -103,3 +103,28 @@ I utilized `req.sanitize()` on the majority of user inputs before processing the
 
 - **Password Integrity**: Passwords were not sanitised because sanitisation alters special characters (e.g., changing `<` to `&lt;`). Hashing algorithms (bcrypt) require the exact original string to generate the correct hash. If I sanitised the password, the user would essentially be registering with a different password than they typed, causing login failures later.
 
+# Berties Books API Documentation
+
+This API provides access to Berties Books' library. It supports searching by name, filtering by price range, and sorting results.
+
+## Base URL
+`https://www.doc.gold.ac.uk/usr/407/`
+
+---
+
+## Endpoints
+
+### Get Books
+`GET /books`
+
+Returns a list of books. If no parameters are provided, it returns all books in the database.
+
+#### Query Parameters
+You can use any combination of the following parameters to refine your results.
+
+| Parameter   | Type   | Description                                                                 |
+| :---        | :---   | :---                                                                        |
+| `search`    | String | Searches for books containing this text in the **name**.                    |
+| `minprice`  | Number | Filters for books with a price **greater than or equal** to this value.     |
+| `max_price` | Number | Filters for books with a price **less than or equal** to this value.        |
+| `sort`      | String | Sorts the results. Accepted values: `name`, `price`.                        |
