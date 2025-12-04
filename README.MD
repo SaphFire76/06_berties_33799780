@@ -129,5 +129,5 @@ You can use any combination of the following parameters to refine your results.
 | `max_price` | Number | Filters for books with a price **less than or equal** to this value.        |
 | `sort`      | String | Sorts the results. Accepted values: `name`, `price`.                        |
 
-#### **Example**: `http://localhost:8000/api/books?sort=price&minprice=10`
+#### Example: `http://localhost:8000/api/books?sort=price&minprice=10`
 Gets books of price greater than 10, sorted by price in ascending order.
