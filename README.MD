@@ -103,14 +103,14 @@ I utilized `req.sanitize()` on the majority of user inputs before processing the
 
 - **Password Integrity**: Passwords were not sanitised because sanitisation alters special characters (e.g., changing `<` to `&lt;`). Hashing algorithms (bcrypt) require the exact original string to generate the correct hash. If I sanitised the password, the user would essentially be registering with a different password than they typed, causing login failures later.
 
+---
+
 # Berties Books API Documentation
 
 This API provides access to Berties Books' library. It supports searching by name, filtering by price range, and sorting results.
 
 ## Base URL
 `https://www.doc.gold.ac.uk/usr/407/`
-
----
 
 ## Endpoints
 
